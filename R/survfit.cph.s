@@ -45,7 +45,10 @@ survfit.cph <- function(formula, newdata, se.fit=TRUE, conf.int=.95,
     n <- nrow(y)
     X <- matrix(0, nrow=n, ncol=1)
   }
-
+  if(is.null(object$linear.predictors)){
+    object$linear.predictors <- rep(0, length(y))
+  }
+  
   strata <- object$strata  ###
   strata.pres <- length(strata) > 0
   if(! length(strata)) strata <- rep(0,  n)
